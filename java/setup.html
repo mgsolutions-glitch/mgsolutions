@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Java Setup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 p-6">
+  <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
+    <!-- Heading -->
+    <h1 class="text-3xl font-bold text-blue-800 mb-4">Java Setup</h1>
+    <p class="text-slate-600 mb-6">
+      In this topic, you will learn how to install Java Development Kit (JDK) and set up your development environment for Java programming.
+    </p>
+
+    <!-- Step 1 -->
+    <div class="mb-6">
+      <h2 class="text-xl font-semibold text-green-700 mb-2">Step 1: Download JDK</h2>
+      <p class="text-slate-700">
+        Visit the official Oracle JDK website or OpenJDK website to download the latest version of JDK.  
+        <a href="https://www.oracle.com/java/technologies/javase-jdk17-downloads.html" 
+           target="_blank" 
+           class="text-blue-600 hover:underline">Download JDK</a>
+      </p>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="mb-6">
+      <h2 class="text-xl font-semibold text-green-700 mb-2">Step 2: Install JDK</h2>
+      <p class="text-slate-700">
+        Run the downloaded installer and follow the on-screen instructions to install JDK on your system.
+      </p>
+      <ul class="list-disc list-inside text-slate-700 ml-4 mt-2">
+        <li>Windows: Run the <code>.exe</code> file.</li>
+        <li>Mac: Run the <code>.dmg</code> file.</li>
+        <li>Linux: Use your package manager or tarball.</li>
+      </ul>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="mb-6">
+      <h2 class="text-xl font-semibold text-green-700 mb-2">Step 3: Configure Environment Variables</h2>
+      <p class="text-slate-700">
+        Add the <code>bin</code> folder of the JDK installation to your system’s PATH environment variable.  
+        This allows you to run <code>java</code> and <code>javac</code> from any directory in your terminal.
+      </p>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="mb-6">
+      <h2 class="text-xl font-semibold text-green-700 mb-2">Step 4: Verify Installation</h2>
+      <p class="text-slate-700">
+        Open a terminal or command prompt and type:
+      </p>
+      <pre class="bg-slate-100 p-3 rounded mt-2 text-sm"><code>java -version
+javac -version</code></pre>
+      <p class="text-slate-700 mt-2">
+        If installed correctly, you should see the installed Java version.
+      </p>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="mb-6">
+      <h2 class="text-xl font-semibold text-green-700 mb-2">Step 5: Install an IDE</h2>
+      <p class="text-slate-700">
+        Install an IDE like IntelliJ IDEA, Eclipse, or VS Code with Java extensions to make coding easier.
+      </p>
+      <ul class="list-disc list-inside text-slate-700 ml-4 mt-2">
+        <li><a href="https://www.jetbrains.com/idea/download/" target="_blank" class="text-blue-600 hover:underline">IntelliJ IDEA</a></li>
+        <li><a href="https://www.eclipse.org/downloads/" target="_blank" class="text-blue-600 hover:underline">Eclipse</a></li>
+        <li><a href="https://code.visualstudio.com/" target="_blank" class="text-blue-600 hover:underline">VS Code</a></li>
+      </ul>
+    </div>
+
+    <!-- Summary -->
+    <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+      <p class="text-green-700 font-semibold">
+        ✅ You are now ready to start programming in Java!
+      </p>
+    </div>
+  </div>
+</body>
+</html>

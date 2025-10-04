@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Final Project</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+body { font-family: 'Inter', sans-serif; background-color: #f9fafb; position: relative; }
+.watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 5rem; font-weight: bold; color: rgba(0,0,0,0.05); pointer-events: none; white-space: nowrap; z-index: 0; }
+.content { position: relative; z-index: 10; max-width: 900px; margin: 0 auto; padding: 2rem; background-color: white; border-radius: 0.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+h1 { font-size: 2rem; font-weight: bold; color: #1e40af; margin-bottom: 1rem; }
+p, li { font-size: 1rem; color: #374151; line-height: 1.6; }
+pre { background: #f3f4f6; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; }
+</style>
+</head>
+<body>
+<div class="watermark">MG Solutions</div>
+<div class="content">
+  <h1>Python Final Project</h1>
+  <p>This project will help you combine all concepts learned: variables, functions, OOP, and file handling.</p>
+
+  <h2>Project Idea: Student Management System</h2>
+  <ul class="list-disc pl-6">
+    <li>Create a <strong>Student</strong> class with name, age, and ID.</li>
+    <li>Allow adding students, displaying details, and saving them to a file.</li>
+    <li>Implement functions for search and update.</li>
+    <li>Use inheritance to create specialized classes like <strong>GraduateStudent</strong> or <strong>UndergraduateStudent</strong>.</li>
+  </ul>
+
+  <h2>Sample Code Snippet</h2>
+  <pre>class Student:
+    def __init__(self, name, age, student_id):
+        self.name = name
+        self.age = age
+        self.student_id = student_id
+
+students = []
+
+def add_student(name, age, sid):
+    students.append(Student(name, age, sid))
+
+add_student("Alice", 20, 101)
+add_student("Bob", 22, 102)
+
+for s in students:
+    print(f"{s.student_id} - {s.name}, {s.age}")</pre>
+
+  <p>Save this data to a file, read it back, and display student details dynamically. This project will give you hands-on experience with Python programming.</p>
+</div>
+</body>
+</html>

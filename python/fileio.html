@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python File I/O</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+body { font-family: 'Inter', sans-serif; background-color: #f9fafb; position: relative; }
+.watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 5rem; font-weight: bold; color: rgba(0,0,0,0.05); pointer-events: none; white-space: nowrap; z-index: 0; }
+.content { position: relative; z-index: 10; max-width: 900px; margin: 0 auto; padding: 2rem; background-color: white; border-radius: 0.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+h1 { font-size: 2rem; font-weight: bold; color: #1e40af; margin-bottom: 1rem; }
+p, li { font-size: 1rem; color: #374151; line-height: 1.6; }
+pre { background: #f3f4f6; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; }
+</style>
+</head>
+<body>
+<div class="watermark">MG Solutions</div>
+<div class="content">
+  <h1>Python File I/O</h1>
+  <p>Python allows reading and writing files using built-in functions.</p>
+
+  <h2>Opening a File</h2>
+  <pre>file = open("example.txt", "r")  # r=read, w=write, a=append</pre>
+
+  <h2>Reading a File</h2>
+  <pre>content = file.read()
+print(content)</pre>
+
+  <h2>Writing to a File</h2>
+  <pre>file = open("example.txt", "w")
+file.write("Hello, World!")
+file.close()</pre>
+
+  <h2>Using with Statement</h2>
+  <pre>with open("example.txt", "r") as file:
+    content = file.read()
+    print(content)</pre>
+
+  <h2>Appending to a File</h2>
+  <pre>with open("example.txt", "a") as file:
+    file.write("\nThis is appended text.")</pre>
+</div>
+</body>
+</html>

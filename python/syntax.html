@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Syntax</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+body { font-family: 'Inter', sans-serif; background-color: #f9fafb; position: relative; }
+.watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 5rem; font-weight: bold; color: rgba(0,0,0,0.05); pointer-events: none; white-space: nowrap; z-index: 0; }
+.content { position: relative; z-index: 10; max-width: 900px; margin: 0 auto; padding: 2rem; background-color: white; border-radius: 0.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+h1 { font-size: 2rem; font-weight: bold; color: #1e40af; margin-bottom: 1rem; }
+p, li { font-size: 1rem; color: #374151; line-height: 1.6; }
+pre { background: #f3f4f6; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; }
+</style>
+</head>
+<body>
+<div class="watermark">MG Solutions</div>
+<div class="content">
+  <h1>Python Syntax</h1>
+  <p>Python uses a clean and readable syntax which makes it easy for beginners.</p>
+
+  <h2>Variables</h2>
+  <pre>name = "John"
+age = 25
+is_student = True</pre>
+
+  <h2>Indentation</h2>
+  <p>Python uses indentation (4 spaces) to define blocks instead of braces.</p>
+  <pre>if age &gt; 18:
+    print("Adult")
+else:
+    print("Minor")</pre>
+
+  <h2>Comments</h2>
+  <pre># This is a single-line comment
+"""
+This is a
+multi-line comment
+"""</pre>
+
+  <h2>Data Types</h2>
+  <ul class="list-disc pl-6">
+    <li>Integer: <code>10</code></li>
+    <li>Float: <code>3.14</code></li>
+    <li>String: <code>"Hello"</code></li>
+    <li>Boolean: <code>True / False</code></li>
+  </ul>
+</div>
+</body>
+</html>

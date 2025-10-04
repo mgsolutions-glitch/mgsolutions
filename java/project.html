@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Final Project</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 p-6">
+  <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
+    <h1 class="text-3xl font-bold text-blue-800 mb-4">Final Project</h1>
+    <p class="text-slate-600 mb-6">
+      Apply everything you’ve learned to build a real-world Java application.
+    </p>
+
+    <h2 class="text-xl font-semibold text-green-700 mb-2">Project Idea</h2>
+    <p class="text-slate-700">
+      Build a <span class="font-bold">Student Management System</span> with the following features:
+    </p>
+    <ul class="list-disc ml-6 text-slate-700 mt-2">
+      <li>Store student details (name, ID, marks)</li>
+      <li>Use classes and objects to represent students</li>
+      <li>Implement inheritance (e.g., Undergraduate, Graduate)</li>
+      <li>Use Streams API to filter and analyze results</li>
+      <li>Provide a simple console menu for interaction</li>
+    </ul>
+
+    <h2 class="text-xl font-semibold text-green-700 mb-2 mt-6">Sample Code Snippet</h2>
+    <pre class="bg-slate-100 p-3 rounded text-sm"><code>
+class Student {
+  String name;
+  int marks;
+  
+  Student(String name, int marks) {
+    this.name = name;
+    this.marks = marks;
+  }
+}
+
+public class Main {
+  public static void main(String[] args) {
+    List<Student> students = List.of(
+      new Student("Alice", 85),
+      new Student("Bob", 60),
+      new Student("Charlie", 92)
+    );
+
+    students.stream()
+            .filter(s -> s.marks > 70)
+            .forEach(s -> System.out.println(s.name));
+  }
+}
+    </code></pre>
+
+    <div class="bg-green-50 border-l-4 border-green-500 p-4 mt-6 rounded">
+      <p class="text-green-700 font-semibold">✅ This project ties together Syntax, Classes, Inheritance, and Streams into a real application.</p>
+    </div>
+  </div>
+</body>
+</html>
