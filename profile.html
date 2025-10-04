@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MG Solutions - Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+body { font-family: "Inter", sans-serif; }
+.tab-active { border-bottom:3px solid #2563eb; color:#2563eb; }
+.tick { background-color: #ecfdf5 !important; border-left:6px solid #10b981; position:relative; padding-left:2.5rem !important; }
+.tick::before { content:"✔"; position:absolute; left:10px; top:50%; transform:translateY(-50%); background:#10b981; color:white; font-size:0.8rem; font-weight:bold; border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; }
+#sidebar { transition: all 0.3s ease; }
+#content-container { position: relative; }
+.watermark { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:80px; color:rgba(0,0,0,0.05); pointer-events:none; user-select:none; z-index:0; }
+</style>
+</head>
+<body class="bg-slate-50 min-h-screen flex">
+
+<!-- Sidebar -->
+<aside id="sidebar" class="w-64 bg-blue-900 text-white p-6 space-y-6">
+  <h2 class="text-2xl font-bold">MG Solutions</h2>
+  <button class="text-white underline mb-2" onclick="toggleSidebar()">Toggle Sidebar</button>
+  <ul class="space-y-4">
+    <li><button onclick="showTab('progress')" id="tab-progress" class="w-full text-left hover:text-blue-300">📊 Progress</button></li>
+    <li><button onclick="showTab('courses')" id="tab-courses" class="w-full text-left hover:text-blue-300">📚 My Courses</button></li>
+    <li><button onclick="showTab('exam')" id="tab-exam" class="w-full text-left hover:text-blue-300 hidden">📝 Exam</button></li>
+    <li><button onclick="showTab('certificates')" id="tab-certificates" class="w-full text-left hover:text-blue-300">🎓 Certificates</button></li>
+    <li><button onclick="redirectToVideo()" id="tab-videos" class="w-full text-left hover:text-blue-300">🎥 Reference Videos</button></li>
+    <li><button onclick="logout()" class="w-full bg-red-500 px-4 py-2 rounded-lg mt-6 hover:bg-red-600">Logout</button></li>
+  </ul>
+</aside>
+
+<!-- Main Content -->
+<main class="flex-1 p-10 relative" id="content-container">
+  <div class="watermark">MG Solutions</div>
+  <h1 id="welcome" class="text-3xl font-bold text-blue-900 mb-2"></h1>
+  <p id="course" class="text-lg text-slate-600 mb-8"></p>
+
+  <div id="content">
+    <!-- Progress -->
+    <section id="progress" class="hidden">
+      <h2 class="text-2xl font-semibold text-blue-800 mb-4">Your Progress</h2>
+      <div class="bg-white p-6 rounded-xl shadow-md relative">
+        <div class="w-full h-3 bg-slate-200 rounded-full z-10 relative">
+          <div id="progress-bar" class="h-3 bg-blue-600 rounded-full transition-all duration-500"></div>
+        </div>
+        <p id="progress-text" class="mt-2 text-sm text-slate-500">0% Completed</p>
+      </div>
+    </section>
+
+    <!-- Courses -->
+    <section id="courses" class="hidden grid grid-cols-4 gap-4">
+      <div>
+        <h2 class="text-2xl font-semibold text-blue-800 mb-4">My Topics</h2>
+        <ul id="topics" class="space-y-2"></ul>
+      </div>
+      <div class="col-span-3 relative">
+        <h2 class="text-xl font-semibold text-blue-700 mb-2">Topic Content</h2>
+        <iframe id="topic-frame" src="" class="w-full h-[500px] border rounded-lg shadow z-10 relative"></iframe>
+      </div>
+    </section>
+
+    <!-- Exam -->
+    <section id="exam" class="hidden">
+      <h2 class="text-2xl font-semibold text-blue-800 mb-4">Exam</h2>
+      <p>Click the button below to start your exam:</p>
+      <button onclick="startExam()" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 mt-4">Start Exam</button>
+    </section>
+
+    <!-- Certificates -->
+    <section id="certificates" class="hidden">
+      <h2 class="text-2xl font-semibold text-blue-800 mb-4">Certificates</h2>
+      <div id="certificate-status" class="text-slate-600">No certificates yet.</div>
+    </section>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const courseTopics = {
+  Python: [
+    { name: "Setup", page: "python/setup.html" },
+    { name: "Syntax & Variables", page: "python/syntax.html" },
+    { name: "Functions", page: "python/functions.html" },
+    { name: "File I/O", page: "python/fileio.html" },
+    { name: "OOP", page: "python/oop.html" },
+    { name: "Final Project", page: "python/project.html" }
+  ],
+  Java: [
+    { name: "Setup", page: "java/setup.html" },
+    { name: "Syntax", page: "java/syntax.html" }, 
+    { name: "Classes", page: "java/classes.html" },
+    { name: "Inheritance", page: "java/inheritance.html" },
+    { name: "Streams API", page: "java/streams.html" },
+    { name: "Final Project", page: "java/project.html" }
+  ]
+};
+
+const coursePages = { Python:"python.html", Java:"java.html", SQL:"sql.html" };
+
+function loadDashboard(){
+  const studentName = sessionStorage.getItem("student_name");
+  const courseName = sessionStorage.getItem("course_name");
+  if(!studentName || !courseName) { window.location.href="index.html"; return; }
+  document.getElementById("welcome").textContent = "Welcome, " + studentName;
+  document.getElementById("course").textContent = "Your registered course: " + courseName;
+  loadTopics(courseName);
+  const savedProgress = localStorage.getItem(`${studentName}_${courseName}_progress`);
+  if(savedProgress){
+    document.getElementById("progress-bar").style.width = savedProgress + "%";
+    document.getElementById("progress-text").textContent = savedProgress + "% Completed";
+  }
+  const visited = JSON.parse(localStorage.getItem(`${studentName}_${courseName}_visited`)||"[]");
+  visited.forEach(topic => { const el = document.getElementById("topic-"+topic); if(el) el.classList.add("tick"); });
+
+  // show exam tab if progress >= 80%
+  const percent = savedProgress?parseInt(savedProgress):0;
+  if(percent>=80){ document.getElementById("tab-exam").classList.remove("hidden"); }
+
+  loadCertificates();
+  showTab("progress");
+}
+
+function loadTopics(courseName){
+  const topics = courseTopics[courseName]||[{ name:"Coming soon...", page:"" }];
+  const topicsContainer = document.getElementById("topics");
+  topicsContainer.innerHTML="";
+  topics.forEach((t,i)=>{
+    const li = document.createElement("li");
+    li.id="topic-"+i;
+    li.className="bg-white p-3 rounded-lg shadow cursor-pointer hover:bg-slate-100";
+    li.textContent=t.name;
+    li.onclick=()=>openTopic(courseName,i,t.page);
+    topicsContainer.appendChild(li);
+  });
+}
+
+function openTopic(courseName,index,page){
+  if(page){
+    document.getElementById("topic-frame").src = page;
+    const studentName = sessionStorage.getItem("student_name");
+    const el = document.getElementById("topic-"+index);
+    el.classList.add("tick");
+    let visited = JSON.parse(localStorage.getItem(`${studentName}_${courseName}_visited`)||"[]");
+    if(!visited.includes(index)){ visited.push(index); localStorage.setItem(`${studentName}_${courseName}_visited`,JSON.stringify(visited)); }
+    updateProgress(courseName,visited.length);
+  }
+}
+
+function updateProgress(courseName,completed){
+  const total = courseTopics[courseName]?.length||0;
+  const percent = total>0?Math.round((completed/total)*100):0;
+  document.getElementById("progress-bar").style.width = percent+"%";
+  document.getElementById("progress-text").textContent = percent+"% Completed";
+  const studentName = sessionStorage.getItem("student_name");
+  localStorage.setItem(`${studentName}_${courseName}_progress`,percent);
+
+  if(percent>=80) document.getElementById("tab-exam").classList.remove("hidden");
+}
+
+function loadCertificates(){
+  const studentName = sessionStorage.getItem("student_name");
+  const certContainer = document.getElementById("certificate-status");
+  const earnedCertificates = JSON.parse(localStorage.getItem(`${studentName}_certificates`)||"[]");
+  if(earnedCertificates.length>0){
+    certContainer.innerHTML="";
+    earnedCertificates.forEach(cert=>{
+      const btn = document.createElement("button");
+      btn.className="bg-green-600 text-white px-4 py-2 rounded-lg mr-2 mb-2 hover:bg-green-700";
+      btn.textContent = cert.course + " Certificate";
+      btn.onclick = ()=>generateCertificate(cert.course);
+      certContainer.appendChild(btn);
+    });
+  }
+}
+
+function generateCertificate(courseName){
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({orientation:"landscape", unit:"pt", format:"a4"});
+  const studentName = sessionStorage.getItem("student_name")||"John Doe";
+  const pageWidth = doc.internal.pageSize.getWidth();
+  doc.setFont("helvetica","bold");
+  doc.setFontSize(36);
+  doc.text("Certificate of Completion",pageWidth/2,100,{align:"center"});
+  doc.setFontSize(28);
+  doc.text(studentName,pageWidth/2,180,{align:"center"});
+  doc.setFontSize(20);
+  doc.text("has successfully completed the course:",pageWidth/2,220,{align:"center"});
+  doc.setFontSize(24);
+  doc.text(courseName,pageWidth/2,260,{align:"center"});
+  doc.save(`${studentName}_${courseName}_Certificate.pdf`);
+}
+
+function showTab(tab){
+  ["progress","courses","exam","certificates"].forEach(id=>{
+    document.getElementById(id).classList.add("hidden");
+    document.getElementById("tab-"+id)?.classList.remove("tab-active");
+  });
+  if(tab!=="videos"){
+    document.getElementById(tab).classList.remove("hidden");
+    document.getElementById("tab-"+tab).classList.add("tab-active");
+  }
+}
+
+function redirectToVideo(){
+  const courseName = sessionStorage.getItem("course_name");
+  const page = coursePages[courseName];
+  if(page) window.location.href=page;
+  else alert("No reference video available for this course.");
+}
+
+function logout(){ sessionStorage.clear(); window.location.href="index.html"; }
+
+function toggleSidebar(){
+  const sidebar = document.getElementById("sidebar");
+  sidebar.style.width = sidebar.style.width==="64px"?"256px":"64px";
+}
+
+function startExam(){
+  const courseName = sessionStorage.getItem("course_name");
+  // Redirect to exams folder
+  window.location.href = "exams/" + courseName.toLowerCase() + "_exam.html";
+}
+
+
+window.onload = loadDashboard;
+</script>
+</body>
+</html>

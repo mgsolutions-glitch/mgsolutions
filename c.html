@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Learning Platform - MG SOLUTIONS</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f8fafc;
+      margin: 0;
+      padding: 0;
+      color: #2c3e50;
+    }
+
+    header {
+      background: #1a252f;
+      color: #fff;
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    }
+
+    header img {
+      height: 45px;
+      margin-right: 15px;
+    }
+
+    header h1 {
+      font-size: 22px;
+      margin: 0;
+      letter-spacing: 1px;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 25px;
+      gap: 20px;
+    }
+
+    .courses, .content {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+    }
+
+    .courses:hover, .content:hover {
+      transform: translateY(-3px);
+    }
+
+    .courses {
+      flex: 1;
+      max-width: 320px;
+    }
+
+    .courses h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: #34495e;
+      border-left: 4px solid #3498db;
+      padding-left: 8px;
+    }
+
+    .course {
+      margin-bottom: 15px;
+    }
+
+    .course h3 {
+      cursor: pointer;
+      padding: 12px;
+      background: #3498db;
+      color: #fff;
+      border-radius: 6px;
+      transition: 0.3s;
+      font-size: 16px;
+    }
+
+    .course h3:hover {
+      background: #2980b9;
+    }
+
+    .topics {
+      display: none;
+      margin-top: 8px;
+      padding-left: 10px;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .topic {
+      cursor: pointer;
+      padding: 10px;
+      background: #ecf0f1;
+      margin: 6px 0;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      font-size: 15px;
+    }
+
+    .topic:hover {
+      background: #d0d7de;
+      transform: translateX(5px);
+    }
+
+    .content {
+      flex: 2;
+      min-width: 340px;
+    }
+
+    .content h2 {
+      margin-top: 0;
+      color: #2c3e50;
+    }
+
+    .content p {
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    iframe {
+      width: 100%;
+      height: 420px;
+      border-radius: 10px;
+      border: none;
+      margin-top: 15px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(-5px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Company Logo">
+    <h1>MG SOLUTIONS</h1>
+  </header>
+
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="courses">
+      <h2>C Language 4-Week Course</h2>
+
+      <!-- Week 1 -->
+      <div class="course">
+        <h3 onclick="toggleTopics('cweek1')">WEEK 1: Basics & Control Flow</h3>
+        <div id="cweek1" class="topics">
+          <div class="topic" onclick="showContent('C Setup & IDE','Install VS Code and MinGW Compiler for C.','https://www.youtube.com/embed/KYxLEDF6kjs')">C Setup & IDE</div>
+          <div class="topic" onclick="showContent('Syntax & Variables','Understanding variables and syntax in C.','https://www.youtube.com/embed/RdSzWxhNnFY')">Syntax & Variables</div>
+          <div class="topic" onclick="showContent('Operators','Arithmetic and logical operators.','https://www.youtube.com/embed/tTpPUq7dtZo')">Operators</div>
+          <div class="topic" onclick="showContent('Control Flow','If, else, switch, and loops.','https://www.youtube.com/embed/ez14U11KqkI')">Control Flow</div>
+          <div class="topic" onclick="showContent('Functions','Return values and basic functions.','https://www.youtube.com/embed/ye2tvFir65g')">Functions</div>
+          <div class="topic" onclick="showContent('Error Handling','Error handling in C programs.','https://www.youtube.com/embed/OOuZLI5ingc')">Error Handling</div>
+        </div>
+      </div>
+
+      <!-- Week 2 -->
+      <div class="course">
+        <h3 onclick="toggleTopics('cweek2')">WEEK 2: Data Structures & File Handling</h3>
+        <div id="cweek2" class="topics">
+          <div class="topic" onclick="showContent('Arrays','Introduction to arrays in C.','https://www.youtube.com/embed/ATA6dYDz954')">Arrays</div>
+          <div class="topic" onclick="showContent('Strings','String handling functions.','https://www.youtube.com/embed/p0Dofc5J15c')">Strings</div>
+          <div class="topic" onclick="showContent('Pointers','Introduction to pointers.','https://www.youtube.com/embed/ye2tvFir65g')">Pointers</div>
+          <div class="topic" onclick="showContent('Structures','Defining and using structures.','https://www.youtube.com/embed/ye2tvFir65g')">Structures</div>
+          <div class="topic" onclick="showContent('File I/O','Read and write files in C.','https://www.youtube.com/embed/ye2tvFir65g')">File I/O</div>
+          <div class="topic" onclick="showContent('Dynamic Memory','malloc, calloc, free usage.','https://www.youtube.com/embed/ye2tvFir65g')">Dynamic Memory</div>
+        </div>
+      </div>
+
+      <!-- Week 3 -->
+      <div class="course">
+        <h3 onclick="toggleTopics('cweek3')">WEEK 3: Advanced Concepts & Algorithms</h3>
+        <div id="cweek3" class="topics">
+          <div class="topic" onclick="showContent('Recursion','Recursive function calls in C.','https://www.youtube.com/embed/ye2tvFir65g')">Recursion</div>
+          <div class="topic" onclick="showContent('Sorting Algorithms','Implement bubble, selection, insertion sort.','https://www.youtube.com/embed/ye2tvFir65g')">Sorting Algorithms</div>
+          <div class="topic" onclick="showContent('Searching Algorithms','Linear and binary search.','https://www.youtube.com/embed/ye2tvFir65g')">Searching Algorithms</div>
+          <div class="topic" onclick="showContent('Linked Lists','Singly and doubly linked lists.','https://www.youtube.com/embed/ye2tvFir65g')">Linked Lists</div>
+          <div class="topic" onclick="showContent('Stacks & Queues','Stack/queue implementation.','https://www.youtube.com/embed/ye2tvFir65g')">Stacks & Queues</div>
+          <div class="topic" onclick="showContent('Memory Management','Understanding memory handling in C.','https://www.youtube.com/embed/ye2tvFir65g')">Memory Management</div>
+        </div>
+      </div>
+
+      <!-- Week 4 -->
+      <div class="course">
+        <h3 onclick="toggleTopics('cweek4')">WEEK 4: Final Project & Optimization</h3>
+        <div id="cweek4" class="topics">
+          <div class="topic" onclick="showContent('Modular Programming','Organizing code into modules.','https://www.youtube.com/embed/ye2tvFir65g')">Modular Programming</div>
+          <div class="topic" onclick="showContent('Preprocessor Directives','#define, #include usage.','https://www.youtube.com/embed/ye2tvFir65g')">Preprocessor Directives</div>
+          <div class="topic" onclick="showContent('Error Handling','Error handling in larger projects.','https://www.youtube.com/embed/ye2tvFir65g')">Error Handling</div>
+          <div class="topic" onclick="showContent('Optimization','Improving program performance.','https://www.youtube.com/embed/ye2tvFir65g')">Optimization</div>
+          <div class="topic" onclick="showContent('Final Project','Combine all concepts into a project.','https://www.youtube.com/embed/ye2tvFir65g')">Final Project</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Viewer -->
+    <div class="content" id="content">
+      <h2>Welcome to C Language 4-Week Course</h2>
+      <p>Select a topic from the left to view details and watch the tutorial here.</p>
+    </div>
+  </div>
+
+  <script>
+    function toggleTopics(courseId) {
+      const topics = document.getElementById(courseId);
+      topics.style.display = topics.style.display === "block" ? "none" : "block";
+    }
+
+    function showContent(title, description, videoUrl) {
+      const contentDiv = document.getElementById('content');
+      contentDiv.innerHTML = `
+        <h2>${title}</h2>
+        <p>${description}</p>
+        <iframe src="${videoUrl}" allowfullscreen></iframe>
+      `;
+    }
+  </script>
+</body>
+</html>

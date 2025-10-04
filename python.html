@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Learning Platform - MG SOLUTIONS</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f8fafc;
+        margin: 0;
+        padding: 0;
+        color: #2c3e50;
+      }
+
+      header {
+        background: #1a252f;
+        color: #fff;
+        padding: 15px 30px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      header img {
+        height: 45px;
+        margin-right: 15px;
+      }
+
+      header h1 {
+        font-size: 22px;
+        margin: 0;
+        letter-spacing: 1px;
+      }
+
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 25px;
+        gap: 20px;
+      }
+
+      .courses,
+      .content {
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+        transition: transform 0.2s;
+      }
+
+      .courses:hover,
+      .content:hover {
+        transform: translateY(-3px);
+      }
+
+      .courses {
+        flex: 1;
+        max-width: 320px;
+      }
+
+      .courses h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+        color: #34495e;
+        border-left: 4px solid #3498db;
+        padding-left: 8px;
+      }
+
+      .course {
+        margin-bottom: 15px;
+      }
+
+      .course h3 {
+        cursor: pointer;
+        padding: 12px;
+        background: #3498db;
+        color: #fff;
+        border-radius: 6px;
+        transition: 0.3s;
+        font-size: 16px;
+      }
+
+      .course h3:hover {
+        background: #2980b9;
+      }
+
+      .topics {
+        display: none;
+        margin-top: 8px;
+        padding-left: 10px;
+        animation: fadeIn 0.3s ease-in-out;
+      }
+
+      .topic {
+        cursor: pointer;
+        padding: 10px;
+        background: #ecf0f1;
+        margin: 6px 0;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        font-size: 15px;
+      }
+
+      .topic:hover {
+        background: #d0d7de;
+        transform: translateX(5px);
+      }
+
+      .content {
+        flex: 2;
+        min-width: 340px;
+      }
+
+      .content h2 {
+        margin-top: 0;
+        color: #2c3e50;
+      }
+
+      .content p {
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      iframe {
+        width: 100%;
+        height: 420px;
+        border-radius: 10px;
+        border: none;
+        margin-top: 15px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-5px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img src="logo.png" alt="Company Logo" />
+      <h1>MG SOLUTIONS</h1>
+    </header>
+
+    <div class="container">
+      <!-- Sidebar -->
+      <div class="courses">
+        <h2>Python 4-Week Course</h2>
+
+        <!-- Week 1 -->
+        <div class="course">
+          <h3 onclick="toggleTopics('week1')">WEEK 1: Basics & Control Flow</h3>
+          <div id="week1" class="topics">
+            <div
+              class="topic"
+              onclick="showContent('Python Setup','Install Python and set up environment.','https://www.youtube.com/embed/hEgO047GxaQ')"
+            >
+              Python Setup
+            </div>
+            <div
+              class="topic"
+              onclick="showContent('Syntax & Variables','Indentation, variables, and data types.','https://www.youtube.com/embed/a43BIxiZ5EM')"
+            >
+              Syntax & Variables
+            </div>
+            <div
+              class="topic"
+              onclick="showContent('Operators','Arithmetic, comparison, logical operators.','https://www.youtube.com/embed/v5MR5JnKcZI')"
+            >
+              Operators
+            </div>
+            <div
+              class="topic"
+              onclick="showContent('Control Flow','If, elif, else, loops.','https://www.youtube.com/embed/Mg6B3RsMd54')"
+            >
+              Control Flow
+            </div>
+            <div
+              class="topic"
+              onclick="showContent('Functions','Functions, scope, return values.','https://www.youtube.com/embed/eezLhJ5oGYg')"
+            >
+              Functions
+            </div>
+            <div
+              class="topic"
+              onclick="showContent('Exception Handling','Try/except blocks for errors.','https://www.youtube.com/embed/NMTEjQ8-AJM')"
+            >
+              Exception Handling
+            </div>
+          </div>
+        </div>
+
+        <!-- Week 2 -->
+        <div class="course">
+          <h3 onclick="toggleTopics('week2')">
+            WEEK 2: Data Structures & File Handling
+          </h3>
+          <div id="week2" class="topics">
+            <div
+              class="topic"
+              onclick="showContent('Data Structures','Lists, tuples, sets, dictionaries.','https://www.youtube.com/embed/xOuRE3IuEB8')"
+            >
+              Data Structures
+            </div>
+            <div
+              class="topic"
+              onclick="showContent('List Comprehensions','Concise ways to build lists.','https://www.youtube.com/embed/-_L0SHhFMC4')"
+            >
+              List Comprehensions
+            </div>
+            <div
+              class="topic"
+              onclick="showContent('String Manipulation','Slicing, indexing, string methods.','https://www.youtube.com/embed/JXvrEOd1uhI')"
+            >
+              String Manipulation
+            </div>
+            <div
+              class="topic"
+              onclick="showContent('File I/O','Read and write files.','https://www.youtube.com/embed/aequTxAvQq4')"
+            >
+              File I/O
+            </div>
+            <div
+              class="topic"
+              onclick="showContent('Modules & Libraries','Import and use libraries.','https://www.youtube.com/embed/L6BoHn8NdX4')"
+            >
+              Modules & Libraries
+            </div>
+          </div>
+        </div>
+
+        <!-- Week 3 -->
+        <div class="course">
+          <h3 onclick="toggleTopics('week3')">
+            WEEK 3: Object-Oriented Programming
+          </h3>
+          <div id="week3" class="topics">
+            <div
+              class="topic"
+              onclick="showContent('Classes & Objects','Defining classes and creating objects.','https://www.youtube.com/embed/6XWeeEg6d3s')"
+            >
+              Classes & Objects
+            </div>
+            <div
+              class="topic"
+              onclick="showContent('Attributes & Methods','Instance variables and methods.','https://www.youtube.com/embed/n_jPQlWhGhM')"
+            >
+              Attributes & Methods
+            </div>
+            <div
+              class="topic"
+              onclick="showContent('Inheritance','Parent-child relationships.','https://www.youtube.com/embed/4SO3sScshvA')"
+            >
+              Inheritance
+            </div>
+            <div
+              class="topic"
+              onclick="showContent('Polymorphism & Encapsulation','Method overriding and data hiding.','https://www.youtube.com/embed/pTB0EiLXUC8')"
+            >
+              Polymorphism & Encapsulation
+            </div>
+            <div
+              class="topic"
+              onclick="showContent('Magic Methods','__init__, __str__, etc.','https://www.youtube.com/embed/NwjSP1_WEfE')"
+            >
+              Magic Methods
+            </div>
+          </div>
+        </div>
+
+        <!-- Week 4 -->
+        <div class="course">
+          <h3 onclick="toggleTopics('week4')">
+            WEEK 4: Advanced Topics & Project
+          </h3>
+          <div id="week4" class="topics">
+            <div
+              class="topic"
+              onclick="showContent('Decorators','Enhance functions with decorators.','https://www.youtube.com/embed/yNzxXZfkLUA')"
+            >
+              Decorators
+            </div>
+            <div
+              class="topic"
+              onclick="showContent('Generators & Iterators','Lazy evaluation and iteration.','https://www.youtube.com/embed/rDj8EBv9ErA')"
+            >
+              Generators & Iterators
+            </div>
+            <div
+              class="topic"
+              onclick="showContent('Context Managers','Manage resources using with.','https://www.youtube.com/embed/-aKFBoZpiqA')"
+            >
+              Context Managers
+            </div>
+            <div
+              class="topic"
+              onclick="showContent('Multithreading','Run tasks concurrently.','https://www.youtube.com/embed/PJ4t2U15ACo')"
+            >
+              Multithreading
+            </div>
+            <div
+              class="topic"
+              onclick="showContent('Final Project','Integrate all learned concepts.','https://www.youtube.com/embed/yVl_G-F7m8c')"
+            >
+              Final Project
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Viewer -->
+      <div class="content" id="content">
+        <h2>Welcome to Python 4-Week Course</h2>
+        <p>
+          Select a topic from the left to view details and watch the tutorial
+          here.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      function toggleTopics(courseId) {
+        const topics = document.getElementById(courseId);
+        topics.style.display =
+          topics.style.display === "block" ? "none" : "block";
+      }
+
+      function showContent(title, description, videoUrl) {
+        const contentDiv = document.getElementById("content");
+        contentDiv.innerHTML = `
+        <h2>${title}</h2>
+        <p>${description}</p>
+        <iframe src="${videoUrl}" allowfullscreen></iframe>
+      `;
+      }
+    </script>
+  </body>
+</html>

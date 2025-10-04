@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course Exam</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 min-h-screen p-10">
+
+<h1 id="exam-title" class="text-3xl font-bold text-blue-900 mb-4"></h1>
+<div id="exam-container" class="space-y-6"></div>
+<button onclick="submitExam()" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 mt-4">Submit Exam</button>
+<p id="exam-result" class="mt-4 text-lg font-semibold text-blue-700"></p>
+
+<script>
+// Get student and course info
+const studentName = sessionStorage.getItem("student_name");
+const courseName = sessionStorage.getItem("course_name");
+
+if(!studentName || !courseName){
+    alert("Please login first");
+    window.location.href="index.html";
+}
+
+// Exam questions for all courses
+const courseAssignments = {
+  Java: [
+    {q:"JDK stands for?", options:["Java Development Kit","Java Document Key"], answer:"Java Development Kit"},
+    {q:"IDE is used for?", options:["Coding","Design only"], answer:"Coding"}
+  ],
+  Python: [
+    {q:"Python is?", options:["Compiled","Interpreted"], answer:"Interpreted"},
+    {q:"Function defined with?", options:["def","function"], answer:"def"}
+  ],
+  SQL: [
+    {q:"SQL stands for?", options:["Structured Query Language","Simple Query Language"], answer:"Structured Query Language"},
+    {q:"Command to get data?", options:["SELECT","GET"], answer:"SELECT"}
+  ],
+  "Web Development": [
+    {q:"HTML stands for?", options:["Hyper Text Markup Language","High Text Markup Language"], answer:"Hyper Text Markup Language"},
+    {q:"CSS stands for?", options:["Cascading Style Sheets","Creative Style Sheets"], answer:"Cascading Style Sheets"}
+  ],
+  C: [
+    {q:"C is?", options:["Compiled","Interpreted"], answer:"Compiled"},
+    {q:"Standard library header?", options:["stdio.h","iostream"], answer:"stdio.h"}
+  ],
+  Cpp: [
+    {q:"Cpp is extension of?", options:["C","Java"], answer:"C"},
+    {q:"Keyword for inheritance?", options:["public","private"], answer:"public"}
+  ],
+  "Data Science": [
+    {q:"Library for data analysis?", options:["Pandas","NumPy"], answer:"Pandas"},
+    {q:"Library for visualization?", options:["Matplotlib","Scikit-learn"], answer:"Matplotlib"}
+  ],
+  JavaScript: [
+    {q:"JS stands for?", options:["JavaScript","Java Syntax"], answer:"JavaScript"},
+    {q:"Keyword to declare variable?", options:["let","var"], answer:"let"}
+  ]
+};
+
+const questions = courseAssignments[courseName] || [];
+
+document.getElementById("exam-title").textContent = `${courseName} Exam`;
+
+// Generate questions
+const container = document.getElementById("exam-container");
+questions.forEach((q,i)=>{
+  const div = document.createElement("div");
+  div.className = "bg-white p-4 rounded-lg shadow";
+  div.innerHTML = `<p class="font-semibold">${i+1}. ${q.q}</p>`;
+  q.options.forEach(opt=>{
+    div.innerHTML += `<label class="block"><input type="radio" name="q${i}" value="${opt}"> ${opt}</label>`;
+  });
+  container.appendChild(div);
+});
+
+// Submit exam
+function submitExam(){
+  let score = 0;
+  questions.forEach((q,i)=>{
+    const ans = document.querySelector(`input[name="q${i}"]:checked`);
+    if(ans && ans.value === q.answer) score++;
+  });
+  const percent = Math.round((score/questions.length)*100);
+  document.getElementById("exam-result").textContent = `You scored ${percent}% for ${courseName} Exam`;
+
+  if(percent >= 60){
+    alert("Exam Passed!");
+    localStorage.setItem(`${studentName}_${courseName}_examCompleted`, "true");
+    // Optionally redirect to dashboard
+    window.location.href="dashboard.html";
+  }else{
+    alert("You must score at least 60% to pass the exam.");
+  }
+}
+
+// Prevent re-attempt if already passed
+const examKey = `${studentName}_${courseName}_examCompleted`;
+if(localStorage.getItem(examKey) === "true"){
+  alert("You have already completed this exam.");
+  window.location.href="dashboard.html";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - MG Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom font-family applied globally */
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .loading-spinner {
+      border-top-color: #3b82f6;
+      -webkit-animation: spin 1s linear infinite;
+      animation: spin 1s linear infinite;
+    }
+
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-slate-100 min-h-screen flex items-center justify-center p-4">
+  <div class="p-12 bg-white rounded-3xl shadow-2xl w-full max-w-sm text-center transform transition-all duration-500 hover:scale-[1.01] border border-blue-100 relative overflow-hidden">
+    <!-- Blue accent on top-left -->
+    <div class="absolute top-0 left-0 w-24 h-24 bg-blue-500 rounded-br-full opacity-10"></div>
+    <h1 class="text-4xl font-extrabold text-blue-900 mb-2 drop-shadow-sm">MG Solutions</h1>
+    <h2 class="text-xl font-medium text-blue-700 mb-10">Sign in to continue</h2>
+    
+    <!-- Login Form -->
+    <div id="login-form">
+      <input type="text" id="username" placeholder="Username"
+        class="w-full px-5 py-3 mb-5 text-sm rounded-xl bg-slate-50 text-blue-900 placeholder-blue-400 border border-slate-200 focus:outline-none focus:ring-4 focus:ring-blue-300 focus:border-transparent transition-all duration-300">
+      <input type="password" id="password" placeholder="Password"
+        class="w-full px-5 py-3 mb-8 text-sm rounded-xl bg-slate-50 text-blue-900 placeholder-blue-400 border border-slate-200 focus:outline-none focus:ring-4 focus:ring-blue-300 focus:border-transparent transition-all duration-300">
+      <button id="login-btn" onclick="login()"
+        class="w-full px-6 py-4 rounded-full border-none bg-blue-600 text-white font-semibold text-lg cursor-pointer transition-all duration-300 hover:bg-blue-700 hover:shadow-lg hover:transform hover:-translate-y-1">
+        Login
+      </button>
+      <p id="error" class="mt-6 text-sm text-red-600 text-center font-medium"></p>
+    </div>
+
+    <!-- Loading Animation -->
+    <div id="loading-overlay" class="absolute inset-0 bg-white bg-opacity-80 flex flex-col items-center justify-center transition-opacity duration-300" style="display:none;">
+      <div class="loading-spinner h-12 w-12 border-4 rounded-full border-blue-200"></div>
+      <p class="mt-4 text-sm font-medium text-blue-600">Please wait...</p>
+    </div>
+
+    <div class="mt-12 text-xs text-blue-400">© 2025 MG Solutions</div>
+  </div>
+
+  <script>
+    async function loadCSV() {
+      const response = await fetch("users.csv");
+      const text = await response.text();
+      const rows = text.trim().split("\n").map(r => r.split(","));
+      const headers = rows.shift();
+      return rows.map(r => {
+        let obj = {};
+        headers.forEach((h, i) => obj[h.trim()] = r[i].trim());
+        return obj;
+      });
+    }
+
+    function showLoading() {
+      document.getElementById("loading-overlay").style.display = "flex";
+      document.getElementById("login-btn").disabled = true;
+    }
+
+    function hideLoading() {
+      document.getElementById("loading-overlay").style.display = "none";
+      document.getElementById("login-btn").disabled = false;
+    }
+
+    async function login() {
+      showLoading();
+      
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      
+      // 3-second buffer
+      await new Promise(resolve => setTimeout(resolve, 3000));
+
+      const users = await loadCSV();
+      
+      hideLoading();
+
+      const found = users.find(u => u.userName === username && u.password === password);
+
+      if (found) {
+        sessionStorage.setItem("student_name", found.student_name);
+        sessionStorage.setItem("course_name", found.course_name);
+        window.location.href = "profile.html";
+      } else {
+        document.getElementById("error").textContent = "Invalid username or password";
+      }
+    }
+  </script>
+</body>
+</html>
