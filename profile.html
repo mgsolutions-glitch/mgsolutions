@@ -18,54 +18,19 @@ body { font-family: "Inter", sans-serif; }
 </head>
 <body class="bg-slate-50 min-h-screen flex">
 
-<!-- Wrapper -->
-<div class="relative">
-
-  <!-- Hidden checkbox to toggle sidebar -->
-  <input type="checkbox" id="sidebar-toggle" class="peer hidden" />
-
-  <!-- Top Bar with Hamburger and Logo -->
-  <div class="flex items-center bg-blue-900 text-white p-4">
-    <!-- Hamburger Icon Label -->
-    <label for="sidebar-toggle" class="mr-4 cursor-pointer">
-      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2"
-        viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-    </label>
-
-    <!-- Logo -->
-    <h2 class="text-2xl font-bold">MG Solutions</h2>
-  </div>
-
-  <!-- Sidebar -->
-  <aside
-    class="peer-checked:block hidden fixed top-0 left-0 w-64 h-full bg-blue-900 text-white p-6 space-y-6 z-50">
-    <ul class="space-y-4 mt-16">
-      <li>
-        <label for="sidebar-toggle" class="w-full block text-left hover:text-blue-300 cursor-pointer">📊 Progress</label>
-      </li>
-      <li>
-        <label for="sidebar-toggle" class="w-full block text-left hover:text-blue-300 cursor-pointer">📚 My Courses</label>
-      </li>
-      <li>
-        <label for="sidebar-toggle" class="w-full block text-left hover:text-blue-300 cursor-pointer hidden">📝 Exam</label>
-      </li>
-      <li>
-        <label for="sidebar-toggle" class="w-full block text-left hover:text-blue-300 cursor-pointer">🎓 Certificates</label>
-      </li>
-      <li>
-        <label for="sidebar-toggle" class="w-full block text-left hover:text-blue-300 cursor-pointer">🎥 Reference Videos</label>
-      </li>
-      <li>
-        <label for="sidebar-toggle"
-          class="w-full block text-left bg-red-500 px-4 py-2 rounded-lg mt-6 hover:bg-red-600 cursor-pointer">Logout</label>
-      </li>
-    </ul>
-  </aside>
-
-</div>
-
+<!-- Sidebar -->
+<aside id="sidebar" class="w-64 bg-blue-900 text-white p-6 space-y-6">
+  <h2 class="text-2xl font-bold">MG Solutions</h2>
+  <button class="text-white underline mb-2" onclick="toggleSidebar()">Toggle Sidebar</button>
+  <ul class="space-y-4">
+    <li><button onclick="showTab('progress')" id="tab-progress" class="w-full text-left hover:text-blue-300">📊 Progress</button></li>
+    <li><button onclick="showTab('courses')" id="tab-courses" class="w-full text-left hover:text-blue-300">📚 My Courses</button></li>
+    <li><button onclick="showTab('exam')" id="tab-exam" class="w-full text-left hover:text-blue-300 hidden">📝 Exam</button></li>
+    <li><button onclick="showTab('certificates')" id="tab-certificates" class="w-full text-left hover:text-blue-300">🎓 Certificates</button></li>
+    <li><button onclick="redirectToVideo()" id="tab-videos" class="w-full text-left hover:text-blue-300">🎥 Reference Videos</button></li>
+    <li><button onclick="logout()" class="w-full bg-red-500 px-4 py-2 rounded-lg mt-6 hover:bg-red-600">Logout</button></li>
+  </ul>
+</aside>
 
 <!-- Main Content -->
 <main class="flex-1 p-10 relative" id="content-container">
@@ -264,4 +229,3 @@ window.onload = loadDashboard;
 </script>
 </body>
 </html>
-
