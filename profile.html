@@ -213,39 +213,9 @@ function redirectToVideo(){
 
 function logout(){ sessionStorage.clear(); window.location.href="index.html"; }
 
-function toggleSidebar() {
-    const sidebar = document.getElementById("sidebar");
-    const isClosed = sidebar.classList.contains("w-0");
-
-    const btn = document.getElementById("hamburger-btn");
-    const openIcon = document.getElementById("hamburger-open-icon");
-    const closeIcon = document.getElementById("hamburger-close-icon");
-
-    if (isClosed) {
-        // OPEN the sidebar
-        sidebar.classList.remove("w-0", "p-0");
-        sidebar.classList.add("w-64", "p-6");
-
-        // Update button appearance/position
-        btn.classList.remove("left-6", "text-blue-900", "bg-white", "shadow-lg", "hover:bg-slate-100");
-        btn.classList.add("left-64", "text-white", "bg-blue-800", "shadow-xl", "hover:bg-blue-700");
-
-        // Toggle icons
-        openIcon.classList.add("hidden");
-        closeIcon.classList.remove("hidden");
-    } else {
-        // CLOSE the sidebar
-        sidebar.classList.remove("w-64", "p-6");
-        sidebar.classList.add("w-0", "p-0");
-
-        // Update button appearance/position
-        btn.classList.remove("left-64", "text-white", "bg-blue-800", "shadow-xl", "hover:bg-blue-700");
-        btn.classList.add("left-6", "text-blue-900", "bg-white", "shadow-lg", "hover:bg-slate-100");
-
-        // Toggle icons
-        openIcon.classList.remove("hidden");
-        closeIcon.classList.add("hidden");
-    }
+function toggleSidebar(){
+  const sidebar = document.getElementById("sidebar");
+  sidebar.style.width = sidebar.style.width==="64px"?"256px":"64px";
 }
 
 function startExam(){
@@ -259,4 +229,3 @@ window.onload = loadDashboard;
 </script>
 </body>
 </html>
-
